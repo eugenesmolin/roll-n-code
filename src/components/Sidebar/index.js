@@ -10,36 +10,19 @@ import Avatar from '@material-ui/core/Avatar';
 
 class Sidebar extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            users: []
+            users: props.users
         };
 
         this.showUserDetails = this.showUserDetails.bind(this);
     }
 
-    async componentDidMount() {
-        const res = await fetch('https://randomuser.me/api/?results=20').then(res => res);
-
-        if (res.ok) {
-            const users = await res.json();
-            this.setState({users: users.results});
-        } else {
-            console.error('Error request!', res);
-        }
-
-        console.log('users list: ', this.state.users);
-    }
-
-    showUserDetails = (e) => {
-        const user = this.state.users.find(user => user.login.username == e.target.dataset.username);
-        this.props.userDetails(user);
-    };
+    showUserDetails = (e) => this.props.changeUserDetails(e.target.dataset.username);
 
     render() {
-
         const user = this.state.users.map((user, key) =>
             <ListItem
                 key={key}
@@ -53,7 +36,7 @@ class Sidebar extends Component {
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary={`${user.name.title} ${user.name.first} ${user.name.last}`}
+                    primary={`${user.name.title}. ${user.name.first} ${user.name.last}`}
                     secondary={user.phone}/>
             </ListItem>
         );

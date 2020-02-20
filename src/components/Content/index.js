@@ -1,58 +1,77 @@
-import React, {Component} from "react";
+import React from "react";
 import './index.scss';
 
-import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 function Content(props) {
 
-    // constructor(props) {
-    //     super(props);
-    //
-    //     this.state = {
-    //         user: {}
-    //     };
-    //
-    //     console.log('content user: ', props.user);
-    // }
-    //
-    // render() {
+    function dateParse(date) {
+        let today = new Date(date),
+            day = today.getDate(),
+            month = today.getMonth() + 1,
+            year = today.getFullYear();
 
-    console.log(props.user)
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
 
+        return `${day}/${month}/${year}`;
+    }
+
+    if (!Object.keys(props.user).length) {
         return (
-
-            <div className="content">
-                <h2 className="text-center">User details</h2>
-
-                <Grid container spacing={4}>
-                    <Grid item xs={2}>Address</Grid>
-                    <Grid item xs={6}>gsfrdgsfgfdgsfgsg</Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
-                    <Grid item xs={2}>Email</Grid>
-                    <Grid item xs={6}>gsfrdgsfgfdgsfgsg</Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
-                    <Grid item xs={2}>Gender</Grid>
-                    <Grid item xs={6}>gsfrdgsfgfdgsfgsg</Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
-                    <Grid item xs={2}>Birthday</Grid>
-                    <Grid item xs={6}>gsfrdgsfgfdgsfgsg</Grid>
-                </Grid>
-
-                <Grid container spacing={4}>
-                    <Grid item xs={2}>Phone</Grid>
-                    <Grid item xs={6}>gsfrdgsfgfdgsfgsg</Grid>
-                </Grid>
-
-            </div>
-
+            <Box display="flex" alignItems="center" justifyContent="center" width={1} p={3}>
+                <Box fontSize="h4.fontSize">Choose your destiny!</Box>
+            </Box>
         )
-    // }
+    }
+
+    return (
+        <Box width={1} p={3}>
+            <Box fontSize="h4.fontSize" fontWeight="fontWeightBold" textAlign="center" mb={3}>User details</Box>
+
+            <Box border={1} borderColor="primary.main" boxShadow={3} py={2} px={3} position="relative" maxWidth="75%" mx="auto">
+                <Box position="absolute" top="15px" right="15px" maxWidth="128px" maxHeight="128px" boxShadow={3}>
+                    <img width="100%" src={props.user.picture.large} alt=""/>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Name:</Box>
+                    <Box color="text.secondary" className="card__desc">
+                        {props.user.name.first} {props.user.name.last}
+                    </Box>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Gender:</Box>
+                    <Box color="text.secondary" className="card__desc">{props.user.gender}</Box>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Age:</Box>
+                    <Box color="text.secondary" className="card__desc">{props.user.dob.age} years old</Box>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Birthday:</Box>
+                    <Box color="text.secondary" className="card__desc">{dateParse(props.user.dob.date)}</Box>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Phone:</Box>
+                    <Box color="text.secondary" className="card__desc">{props.user.phone}</Box>
+                </Box>
+                <Box display="flex" mb={2}>
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Address:</Box>
+                    <Box color="text.secondary" className="card__desc">
+                        {props.user.location.country},&nbsp;
+                        {props.user.location.city},&nbsp;
+                        {props.user.location.street.name},&nbsp;
+                        {props.user.location.street.number}
+                    </Box>
+                </Box>
+                <Box display="flex">
+                    <Box color="primary.main" fontWeight="fontWeightBold" fontStyle="italic" minWidth="100px">Email:</Box>
+                    <Box color="text.secondary" className="card__desc">{props.user.email}</Box>
+                </Box>
+            </Box>
+
+        </Box>
+    )
 }
 
 export default Content;
