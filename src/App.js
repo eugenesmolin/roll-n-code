@@ -1,22 +1,40 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css'
 
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 import Content from './components/Content'
 
-function App() {
-    return (
-        <div className="App">
+class App extends Component {
 
-            <Header/>
+    constructor() {
+        super();
 
-            <Sidebar/>
+        this.state = {
+            user: {}
+        };
 
-            <Content/>
+        this.userDetails = this.userDetails.bind(this);
+    }
 
-        </div>
-    );
+    userDetails = async (value) => {
+        console.log('update user: ', value)
+        await this.setState({ user: value })
+    };
+
+    render() {
+        return (
+            <div className="App">
+
+                <Header/>
+
+                <Sidebar userDetails={this.userDetails}/>
+
+                <Content user={this.state.user}/>
+
+            </div>
+        );
+    }
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import React from "react";
-// import './index.css'
+// import './index.scss'
 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
