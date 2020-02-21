@@ -4,11 +4,8 @@
   overflow-y: auto;
   max-width: 360px;
   background-color: rgba(0, 0, 0, .03);
-  border-right: 1px solid #dee2e6;
 
   &__item {
-    border-top: 1px solid #f6fafe;
-    border-bottom: 1px solid #dee2e6;
     & > * {
       pointer-events: none;
     }

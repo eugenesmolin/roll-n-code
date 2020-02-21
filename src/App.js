@@ -32,10 +32,10 @@ class App extends Component {
         }
 
         console.log('users list: ', this.state.users);
-        console.log('user details: ', this.state.userDetails);
     }
 
     changeUserDetails = (id) => {
+        // Сортировка происходит по имени, так как id приходит пустой либо null
         const user = this.state.users.find(user => user.login.username === id);
         this.setState({userDetails: user})
     };

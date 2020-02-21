@@ -25,6 +25,7 @@ class Sidebar extends Component {
     render() {
         const user = this.state.users.map((user, key) =>
             <ListItem
+                button
                 key={key}
                 data-username={user.login.username}
                 className="sidebar-list__item"
